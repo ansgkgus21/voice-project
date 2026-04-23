@@ -1,15 +1,16 @@
 import re
 
 SYNONYM_MAP = {
-    "order": ["order", "want", "would like", "get", "have","give"],
+    "order": ["order", "want", "would like","have","要", "点"], # "get", "give"
     # "menu": ["menu", "list", "food list"],
     "bill": ["bill", "check", "pay", "payment"],
     "wait": ["wait", "moment", "second"],
     "sorry": ["sorry", "apologize", "my mistake"],
     "signature" : ['sign','signature','signs'],
-    "size" : ['size'],
+    "size" : ['size','large','small','medium',"尺寸", "大", "中", "小"],
     "soon" : ['soon','shortly','right away'],
-    "ice" : ['ice', 'hot']
+    "ice" : ['ice', 'hot',"热", "冰"],
+    "receipt" : ['receipt']
 
 }
 
@@ -53,6 +54,9 @@ def smarter_template(text):
     
     if "ice" in text :
         return "Hot or iced?"
+    
+    if "receipt" in text :
+        return "Would you like a receipt?"
 
     return text
 

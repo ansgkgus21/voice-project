@@ -83,6 +83,6 @@ def translate(text, target="en", use_traditional=False):
 # 5. 테스트
 # =========================
 if __name__ == "__main__":
-    print("영어:", translate('어떤 거 드릴까요?'))
+    print("영어:", translate('영수증 드릴까요?'))
     print("중국어(간체):", translate("더 필요한 거 있으신가요?", "zh"))
     print("중국어(번체):", translate("더 필요한 거 있으신가요?", "zh", use_traditional=True))
