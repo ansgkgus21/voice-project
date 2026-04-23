@@ -1,5 +1,5 @@
 # pip install sentencepiece, transformers, torch
-# pip isstall opencc-python-reimplemented
+# pip install opencc-python-reimplemented
 
 from transformers import M2M100ForConditionalGeneration, M2M100Tokenizer
 from opencc import OpenCC
