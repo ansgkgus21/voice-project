@@ -1,5 +1,5 @@
 from transformers import M2M100ForConditionalGeneration, M2M100Tokenizer
-# from opencc import OpenCC
+from opencc import OpenCC
 import torch
 
 import naturalize_en
@@ -14,7 +14,7 @@ tokenizer = M2M100Tokenizer.from_pretrained(model_name)
 model = M2M100ForConditionalGeneration.from_pretrained(model_name)
 
 # OpenCC (간체 → 번체)
-# cc = OpenCC('s2t')
+cc = OpenCC('s2t')
 
 torch.set_num_threads(8)
 
@@ -44,7 +44,7 @@ torch.set_num_threads(8)
 # =========================
 # 3. 번역 함수
 # =========================
-def translate(text, target="en") : # use_traditional=False):
+def translate(text, target="en", use_traditional=False):
     tokenizer.src_lang = "ko"
 
     inputs = tokenizer(text, return_tensors="pt")
@@ -69,9 +69,9 @@ def translate(text, target="en") : # use_traditional=False):
         nor_res = mappingword.smarter_template(result)
         result = naturalize_en.naturalize_en(nor_res)
 
-    # # 중국어 번체 변환
-    # if target == "zh" and use_traditional:
-    #     result = cc.convert(result)
+    # 중국어 번체 변환
+    if target == "zh" and use_traditional:
+        result = cc.convert(result)
 
     return result
 
@@ -81,5 +81,5 @@ def translate(text, target="en") : # use_traditional=False):
 # =========================
 if __name__ == "__main__":
     print("영어:", translate('더 필요한 거 있으신가요?'))
-    # print("중국어(간체):", translate("물 두 잔 주세요", "zh"))
-    # print("중국어(번체):", translate("물 두 잔 주세요", "zh", use_traditional=True))
+    print("중국어(간체):", translate("더 필요한 거 있으신가요?", "zh"))
+    print("중국어(번체):", translate("더 필요한 거 있으신가요?", "zh", use_traditional=True))
