@@ -1,0 +1,32 @@
+def apply_fixed_templates(text):
+    text_lower = text.lower()
+
+    # ✅ 계산
+    if re.search(r"(pay|bill|check)", text_lower):
+        return "Can I get the bill?"
+
+    # ✅ 메뉴
+    if re.search(r"(menu)", text_lower):
+        return "Can I see the menu?"
+
+    # ✅ 물 / 추가 요청
+    if re.search(r"(water)", text_lower):
+        return "Can I get some water?"
+
+    if re.search(r"(napkin)", text_lower):
+        return "Can I get some napkins?"
+    
+    if re.search(r"(more)", text_lower):
+        return "Can I get some more?"
+
+    # ✅ 예약
+    if re.search(r"(reservation|book|table)", text_lower):
+        return "I'd like to book a table."
+
+    # ✅ 주문 (마지막에) >> 메뉴 이름 넣으면 됨 (근데 이거 손님이 말할 문장인데..)
+    match = re.search(r"(pasta|steak|pizza|burger|coffee|beer)", text_lower)
+    if match:
+        item = match.group(0)
+        return f"Can I get {item}?"
+
+    return None  # 고정 안 하면 None
